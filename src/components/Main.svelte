@@ -111,7 +111,7 @@
                 My <span class="poppins text-blue-500">Career</span> Journey
             </h3>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
             {#each experiences as experience}
                 <Experience data={experience} />
             {/each}
@@ -135,7 +135,7 @@
             <i class="fa-regular fa-circle-play" />
             <p>Watch the video</p>
         </a> -->
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
 
             {#each projects as project}
                 <Project data={project} />
