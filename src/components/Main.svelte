@@ -2,6 +2,7 @@
     import Project from "./Project.svelte";
     import Experience from "./Experience.svelte";
     import Contact from "./Contact.svelte";
+    import Techstack from "./Techstack.svelte";
 
     let projects = [
         {
@@ -9,46 +10,55 @@
             icon: "fa-solid fa-diagram-project",
             title: "Information system for internal dashboard of Malang Medina City.",
             description: "Planning, designing, and developing a web-based information system for internal use, including a dashboard for monitoring and managing data. Developed with Python (Django)",
+            techstacks: ["PYTHON", "DJANGO", "POSTGRESQL", "FIREBASE"],
         },
         {
             name: "Proyekin",
             icon: "fa-solid fa-puzzle-piece",
             title: "Freelancer web platform for Fasilkom UI",
-            description: "Developed and implemented a Golang API with Design Pattern for efficient services, including notification and chat room endpoints, alongside PostgreSQL queries for data accuracy."
+            description: "Developed and implemented a Golang API with Design Pattern for efficient services, including notification and chat room endpoints, alongside PostgreSQL queries for data accuracy.",
+            techstacks: ["GO", "POSTGRESQL",],
         },
         {
             name: "Reviewin",
             icon: "fa-solid fa-list-check",
             title: "Peer-based CV Review Platform",
             description: "Developed a GraphQL API backend with seamless integration, implemented JWT-based authentication for secure access, and created a cron program for data synchronization, ensuring constant data accuracy.",
+            techstacks: ["GO", "POSTGRESQL", "GRAPHQL", "NGINX"],
         },
     ];
 
     let experiences = [
         {
             number: 1,
-            company: "SayaKaya - Internship",
-            role: "Fullstack Engineer",
-            period: "June 2021 - August 2021",
-            description:
-                "Built a <strong class='text-blue-500'>GraphQL API</strong> backend in Golang for a financial planner feature, implemented JWT authentication, and crafted a user-friendly admin dashboard with SvelteJS for seamless scheduling and management of financial plans.",
-        },
-        {
-            number: 2,
-            company: "Tokopedia - Internship & Fulltime",
-            role: "Software Engineer",
-            period: "August 2021 - November 2022",
-            description:
-                "I created a Golang-based agent integration project for Tokopedia, expanding offerings, synchronized data between ElasticSearch and MySQL using NSQ for consistency, conducted unit and integration testing (GQL, gRPC), and monitored deployments with NewRelic and Jenkins for quality assurance.",
-        },
-        {
-            number: 3,
             company: "Mindtera - Fulltime",
+            href: "https://mindtera.com",
             role : "Software Engineer",
             period: "December 2022 - Present",
             description:
                 "Leading development and maintenance of a nine-service microservice for a rapidly scaling SaaS platform, collaborating cross-functionally for seamless integration, and utilizing cutting-edge tools to optimize performance and reliability.",
-        }
+            techstacks: ["GO", "GRPC", "POSTGRESQL", "REDIS", "DOCKER", "KUBERNETES",],
+        },
+        {
+            number: 2,
+            company: "Tokopedia - Internship & Fulltime",
+            href: "https://tokopedia.com",
+            role: "Software Engineer",
+            period: "August 2021 - November 2022",
+            description:
+                "I created a Golang-based agent integration project for Tokopedia, expanding offerings, synchronized data between ElasticSearch and MySQL using NSQ for consistency, conducted unit and integration testing (GQL, gRPC), and monitored deployments with NewRelic and Jenkins for quality assurance.",
+            techstacks: ["GO", "GRPC", "GRAPHQL", "MYSQL", "POSTGRESQL", "REDIS", "ELASTICSEARCH", "JENKINS", "NGINX"],
+        },
+        {
+            number: 3,
+            company: "SayaKaya - Internship",
+            href: "https://sayakaya.id",
+            role: "Fullstack Engineer",
+            period: "June 2021 - August 2021",
+            description:
+                "Built a <strong class='text-blue-500'>GraphQL API</strong> backend in Golang for a financial planner feature, implemented JWT authentication, and crafted a user-friendly admin dashboard with SvelteJS for seamless scheduling and management of financial plans.",
+            techstacks: ["GO", "JAVASCRIPT", "SVELTE", "POSTGRESQL", "GRAPHQL",],
+        },
     ]
 
     let benefits = [
@@ -90,7 +100,6 @@
             </p>
             <div class="flex justify-center lg:justify-start ">
                 <Contact />
-
               </div>
         </div>
         <div class="relative grid place-items-center">
@@ -113,7 +122,9 @@
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
             {#each experiences as experience}
-                <Experience data={experience} />
+                <Experience data={experience} > 
+                    <Techstack techstacks={experience.techstacks} />
+                </Experience>
             {/each}
 
         </div>
@@ -138,7 +149,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
 
             {#each projects as project}
-                <Project data={project} />
+                <Project data={project} > 
+                    <Techstack techstacks={project.techstacks} />
+                </Project>
             {/each}
             
         </div>
