@@ -31,16 +31,26 @@
     let experiences = [
         {
             number: 1,
+            company: "Paper.id - Fulltime",
+            href: "https://paper.id",
+            role : "Software Engineer II",
+            period: "July 2024 - Present",
+            description:
+                "Served as Software Engineer II at Paper.id, developing microservices for a rapidly scaling SaaS platform. Collaborated cross-functionally to ensure seamless integration and utilized cutting-edge tools to optimize performance and reliability, while maintaining a focus on scalability and reliability.",
+            techstacks: ["GO", "MYSQL", "REDIS", "DOCKER", "KUBERNETES",],
+        },
+        {
+            number: 2,
             company: "Mindtera - Fulltime",
             href: "https://mindtera.com",
             role : "Software Engineer",
-            period: "December 2022 - Present",
+            period: "December 2022 - July 2024",
             description:
                 "Leading development and maintenance of a nine-service microservice for a rapidly scaling SaaS platform, collaborating cross-functionally for seamless integration, and utilizing cutting-edge tools to optimize performance and reliability.",
             techstacks: ["GO", "GRPC", "POSTGRESQL", "REDIS", "DOCKER", "KUBERNETES",],
         },
         {
-            number: 2,
+            number: 3,
             company: "Tokopedia - Internship & Fulltime",
             href: "https://tokopedia.com",
             role: "Software Engineer",
@@ -50,7 +60,7 @@
             techstacks: ["GO", "GRPC", "GRAPHQL", "MYSQL", "POSTGRESQL", "REDIS", "ELASTICSEARCH", "JENKINS", "NGINX"],
         },
         {
-            number: 3,
+            number: 4,
             company: "SayaKaya - Internship",
             href: "https://sayakaya.id",
             role: "Fullstack Engineer",
