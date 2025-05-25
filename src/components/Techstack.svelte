@@ -1,5 +1,5 @@
 <script>
-    export let techstacks;
+    let { techstacks } = $props();
 </script>
 
 {#each techstacks as tech}

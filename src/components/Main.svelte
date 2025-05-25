@@ -4,7 +4,7 @@
     import Contact from "./Contact.svelte";
     import Techstack from "./Techstack.svelte";
 
-    let projects = [
+    let projects = $state([
         {
             name: "SID Malang Medina City",
             icon: "fa-solid fa-diagram-project",
@@ -26,9 +26,9 @@
             description: "Developed a GraphQL API backend with seamless integration, implemented JWT-based authentication for secure access, and created a cron program for data synchronization, ensuring constant data accuracy.",
             techstacks: ["GO", "POSTGRESQL", "GRAPHQL", "NGINX"],
         },
-    ];
+    ]);
 
-    let experiences = [
+    let experiences = $state([
         {
             number: 1,
             company: "Paper.id - Fulltime",
@@ -69,9 +69,9 @@
                 "Built a <strong class='text-blue-500'>GraphQL API</strong> backend in Golang for a financial planner feature, implemented JWT authentication, and crafted a user-friendly admin dashboard with SvelteJS for seamless scheduling and management of financial plans.",
             techstacks: ["GO", "JAVASCRIPT", "SVELTE", "POSTGRESQL", "GRAPHQL",],
         },
-    ]
+    ])
 
-    let benefits = [
+    let benefits = $state([
         {
             name: "Experienced Backend Engineer",
             description:
@@ -87,25 +87,25 @@
             description:
                 "Communication is key and it's a paramount value of mine. I believe in transparency and constructive communication above all else. This helps me develop deep relationships and ensures my effectiveness and productivity in any work space with any team.",
         },
-    ];
+    ]);
 </script>
 
-<main class="flex flex-col flex-1 p-4">
+<main class="flex flex-col flex-1 bg-white dark:bg-black">
     <section
         id="introPage"
-        class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-8 sm:py-14"
+        class="grid grid-cols-1 lg:grid-cols-2 gap-10 py-20 sm:py-32 px-8 md:px-16 lg:px-24"
     >
         <div
             class="flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-8 lg:gap-10"
         >
             
             <h2 class="font-semibold text-4xl sm:text-5xl md:text-6xl">
-                Hi! I'm <span class="poppins text-blue-500">Ali Irsyaad </span>,
+                Hi! I'm <span class="poppins">Ali Irsyaad</span>,
                 <br /> 
-                a <span class="poppins text-blue-500">Software</span> Engineer
+                a <span class="poppins">Software</span> Engineer
             </h2>
             <p class="text-base sm:text-lg md:text-xl">
-             Specializing in <span class="text-blue-500"> Backend Engineer</span> with Go and Python.
+             Specializing in <span class="font-semibold">Backend Engineering</span> with Go and Python.
              <br>
             </p>
             <div class="flex justify-center lg:justify-start ">
@@ -113,21 +113,21 @@
               </div>
         </div>
         <div class="relative grid place-items-center">
-            <!-- svelte-ignore a11y-img-redundant-alt -->
+            <!-- svelte-ignore a11y_img_redundant_alt -->
             <img
                 src={"images/profile.png"}
-                alt="Profile Picture of Ali Irsyaad"
+                alt="Ali Irsyaad"
                 class="object-cover z-[2] max-h-[70vh]"
             />
         </div>
     </section>
-    <section class="py-20 lg:py-32 flex flex-col gap-24" id="experiences">
+    <section class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24" id="experiences">
         <div class="flex flex-col gap-2 text-center">
             <!-- <h6 class="text-large sm:text-xl md:text-2xl">
                 A few of my creative endeavors.
             </h6> -->
             <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">
-                My <span class="poppins text-blue-500">Career</span> Journey
+                My <span class="poppins">Career</span> Journey
             </h3>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
@@ -139,13 +139,13 @@
 
         </div>
     </section>
-    <section class="py-20 lg:py-32 flex flex-col gap-24" id="projects">
+    <section class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24" id="projects">
         <div class="flex flex-col gap-2 text-center">
             <!-- <h6 class="text-large sm:text-xl md:text-2xl">
                 A few of my creative endeavors.
             </h6> -->
             <h3 class="font-semibold text-3xl sm:text-4xl md:text-5xl">
-                My <span class="poppins text-blue-500">Project</span> Portfolio
+                My <span class="poppins">Project</span> Portfolio
             </h3>
         </div>
         <!-- <a
@@ -168,10 +168,10 @@
     </section>
     <section
         id="about"
-        class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col gap-16 sm:gap-20 md:gap-24 relative"
+        class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col gap-16 sm:gap-20 md:gap-24 relative px-8 md:px-16 lg:px-24"
     >
         <div
-            class="flex flex-col gap-2 text-center relative before:absolute before:top-0 before:left-0 before:w-2/3 before:h-1.5 before:bg-blue-700 after:absolute after:bottom-0 after:right-0 after:w-2/3 after:h-1.5 after:bg-blue-700 py-4"
+            class="flex flex-col gap-2 text-center relative before:absolute before:top-0 before:left-0 before:w-2/3 before:h-1.5 before:bg-black dark:before:bg-white after:absolute after:bottom-0 after:right-0 after:w-2/3 after:h-1.5 after:bg-black dark:after:bg-white py-4"
         >
             <h6 class="text-large sm:text-xl md:text-2xl">
                 Want to know more?

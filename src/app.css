@@ -6,6 +6,17 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Base theme styles */
+body {
+    @apply bg-white dark:bg-black text-black dark:text-white transition-colors duration-200;
+}
+
+/* Remove default margins for full-screen layout */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
 * {
     font-family: 'Roboto', sans-serif;
 }
