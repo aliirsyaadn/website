@@ -154,6 +154,52 @@
         return JSON.stringify(obj, null, 2);
     }
     
+    function formatJSONWithDateTooltips(obj) {
+        const formatted = JSON.stringify(obj, null, 2);
+        const lines = formatted.split('\n');
+        return lines.map(line => {
+            const epochMatch = line.match(/"([^"]+)":\s*(\d{10,13}),?$/);
+            if (epochMatch) {
+                const key = epochMatch[1];
+                const value = epochMatch[2];
+                const timestamp = parseInt(value);
+                
+                if (isLikelyEpochTime(key, timestamp)) {
+                    const isMilliseconds = value.length === 13;
+                    const date = new Date(isMilliseconds ? timestamp : timestamp * 1000);
+                    if (!isNaN(date.getTime())) {
+                        return {
+                            text: line,
+                            hasTooltip: true,
+                            tooltip: date.toLocaleString('en-US', { 
+                                dateStyle: 'full', 
+                                timeStyle: 'medium' 
+                            })
+                        };
+                    }
+                }
+            }
+            return { text: line, hasTooltip: false };
+        });
+    }
+    
+    function isLikelyEpochTime(key, value) {
+        const epochKeys = ['iat', 'exp', 'nbf', 'auth_time', 'updated_at', 'created_at', 'timestamp'];
+        const lowerKey = key.toLowerCase();
+        
+        if (epochKeys.some(k => lowerKey.includes(k))) {
+            return true;
+        }
+        
+        const now = Date.now();
+        const year2000 = 946684800000;
+        const year2100 = 4102444800000;
+        
+        const valueMs = value.toString().length === 13 ? value : value * 1000;
+        
+        return valueMs > year2000 && valueMs < year2100;
+    }
+    
     // Remove automatic decode - user must press button or Enter
 </script>
 
@@ -312,7 +358,23 @@
                             {/if}
                         </div>
                         {#if payload}
-                            <pre class="text-sm font-mono text-gray-700 dark:text-zinc-300 overflow-x-auto">{formatJSON(payload)}</pre>
+                            <div class="text-sm font-mono text-gray-700 dark:text-zinc-300 overflow-x-auto">
+                                {#each formatJSONWithDateTooltips(payload) as line}
+                                    {#if line.hasTooltip}
+                                        <div class="group relative inline-block w-full hover:bg-gray-100 dark:hover:bg-zinc-800 px-1 -mx-1 rounded">
+                                            <pre class="inline">{line.text}</pre>
+                                            <div class="absolute bottom-full left-0 mb-2 hidden group-hover:block z-10">
+                                                <div class="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 shadow-lg whitespace-nowrap">
+                                                    {line.tooltip}
+                                                    <div class="absolute top-full left-4 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-gray-900"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {:else}
+                                        <pre>{line.text}</pre>
+                                    {/if}
+                                {/each}
+                            </div>
                         {:else}
                             <p class="text-gray-600 dark:text-gray-500">No payload data</p>
                         {/if}

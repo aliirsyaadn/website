@@ -17,6 +17,7 @@
     const tools = [
         { name: "Pomodoro Timer", path: "/tools/pomodoro" },
         { name: "JSON Lint", path: "/tools/json-lint" },
+        { name: "JSON Escape/Unescape", path: "/tools/json-escape" },
         { name: "JWT Parser", path: "/tools/jwt-parser" },
         { name: "UUID Generator", path: "/tools/uuid" },
         { name: "Base64 Encoder", path: "/tools/base64" }
