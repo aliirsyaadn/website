@@ -1,39 +1,34 @@
 <script>
     import { browser } from '$app/environment';
-    
+    import { ToolLayout, ToolSection, ToolButton, ToolInput } from '../../../components/tools';
+
     let minutes = $state(25);
     let seconds = $state(0);
     let isRunning = $state(false);
     let isBreak = $state(false);
     let intervalId = null;
-    
-    // Custom time inputs
-    let customMinutes = $state(25);
-    let customSeconds = $state(0);
-    let customBreakMinutes = $state(5);
-    let customBreakSeconds = $state(0);
-    let showCustomTime = $state(false);
-    
+
+    // Settings
+    let focusMinutes = $state(25);
+    let breakMinutes = $state(5);
+
+    // Todo list
     let todos = $state([]);
     let newTodo = $state('');
     let editingId = $state(null);
     let editingText = $state('');
-    
+
     const STORAGE_KEY = 'pomodoro-todos';
-    
+
     if (browser) {
         const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            todos = JSON.parse(saved);
-        }
+        if (saved) todos = JSON.parse(saved);
     }
-    
+
     function saveTodos() {
-        if (browser) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-        }
+        if (browser) localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
     }
-    
+
     function startTimer() {
         isRunning = true;
         intervalId = setInterval(() => {
@@ -42,12 +37,10 @@
                     stopTimer();
                     playNotification();
                     if (isBreak) {
-                        minutes = customMinutes;
-                        seconds = customSeconds;
+                        minutes = focusMinutes;
                         isBreak = false;
                     } else {
-                        minutes = customBreakMinutes;
-                        seconds = customBreakSeconds;
+                        minutes = breakMinutes;
                         isBreak = true;
                     }
                     return;
@@ -59,7 +52,7 @@
             }
         }, 1000);
     }
-    
+
     function stopTimer() {
         isRunning = false;
         if (intervalId) {
@@ -67,82 +60,64 @@
             intervalId = null;
         }
     }
-    
+
     function resetTimer() {
         stopTimer();
-        minutes = isBreak ? customBreakMinutes : customMinutes;
-        seconds = isBreak ? customBreakSeconds : customSeconds;
+        minutes = isBreak ? breakMinutes : focusMinutes;
+        seconds = 0;
     }
-    
-    function setCustomTime() {
-        if (!isRunning) {
-            minutes = isBreak ? customBreakMinutes : customMinutes;
-            seconds = isBreak ? customBreakSeconds : customSeconds;
-        }
+
+    function switchMode(toBreak) {
+        stopTimer();
+        isBreak = toBreak;
+        minutes = toBreak ? breakMinutes : focusMinutes;
+        seconds = 0;
     }
-    
-    function validateTimeInput(value, max) {
-        const num = parseInt(value) || 0;
-        return Math.min(Math.max(0, num), max);
-    }
-    
+
     function playNotification() {
-        if (browser && 'Notification' in window) {
-            if (Notification.permission === 'granted') {
-                new Notification('Pomodoro Timer', {
-                    body: isBreak ? 'Break time is over!' : 'Time for a break!',
-                    icon: '/favicon.png'
-                });
-            }
+        if (browser && 'Notification' in window && Notification.permission === 'granted') {
+            new Notification('Pomodoro Timer', {
+                body: isBreak ? 'Break time is over!' : 'Time for a break!',
+            });
         }
     }
-    
+
     function addTodo() {
         if (newTodo.trim()) {
             todos = [...todos, {
                 id: Date.now(),
                 text: newTodo.trim(),
-                completed: false,
-                createdAt: new Date().toISOString()
+                completed: false
             }];
             newTodo = '';
             saveTodos();
         }
     }
-    
+
     function toggleTodo(id) {
-        todos = todos.map(todo => 
-            todo.id === id ? { ...todo, completed: !todo.completed } : todo
-        );
+        todos = todos.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
         saveTodos();
     }
-    
+
     function deleteTodo(id) {
-        todos = todos.filter(todo => todo.id !== id);
+        todos = todos.filter(t => t.id !== id);
         saveTodos();
     }
-    
+
     function startEditing(id, text) {
         editingId = id;
         editingText = text;
     }
-    
+
     function saveEdit() {
         if (editingText.trim()) {
-            todos = todos.map(todo =>
-                todo.id === editingId ? { ...todo, text: editingText.trim() } : todo
-            );
+            todos = todos.map(t => t.id === editingId ? { ...t, text: editingText.trim() } : t);
             saveTodos();
         }
         editingId = null;
         editingText = '';
     }
-    
-    function cancelEdit() {
-        editingId = null;
-        editingText = '';
-    }
-    
+
     $effect(() => {
         if (browser && 'Notification' in window && Notification.permission === 'default') {
             Notification.requestPermission();
@@ -150,220 +125,308 @@
     });
 </script>
 
-<svelte:head>
-    <title>Pomodoro Timer | aliirsyaadn</title>
-</svelte:head>
-
-<div class="max-w-4xl mx-auto w-full">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-8">
-        <span class="poppins">Pomodoro Timer</span>
-    </h1>
-    
-    <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white dark:bg-zinc-900 rounded-lg p-6 border border-gray-200 dark:border-zinc-800">
-            <div class="text-center mb-8">
-                <div class="text-6xl font-mono font-bold text-black dark:text-white mb-4">
+<ToolLayout
+    title="Pomodoro Timer"
+    description="Stay focused with the Pomodoro technique"
+    icon="fa-solid fa-clock"
+>
+    <div class="grid md:grid-cols-2 gap-6">
+        <!-- Timer Section -->
+        <ToolSection>
+            <div class="timer-display">
+                <div class="timer-time">
                     {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
                 </div>
-                <div class="text-xl text-gray-600 dark:text-zinc-400 mb-6">
+                <div class="timer-label">
                     {isBreak ? 'Break Time' : 'Focus Time'}
                 </div>
-                
-                <div class="flex gap-4 justify-center">
-                    {#if !isRunning}
-                        <button
-                            onclick={startTimer}
-                            class="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-                        >
-                            Start
-                        </button>
-                    {:else}
-                        <button
-                            onclick={stopTimer}
-                            class="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                        >
-                            Pause
-                        </button>
-                    {/if}
-                    <button
-                        onclick={resetTimer}
-                        class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-                    >
-                        Reset
-                    </button>
-                </div>
             </div>
-            
-            <div class="mb-6">
-                <button
-                    onclick={() => showCustomTime = !showCustomTime}
-                    class="w-full px-4 py-2 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors text-sm flex items-center justify-center gap-2"
-                >
-                    <svg class={"w-4 h-4 transition-transform " + (showCustomTime ? "rotate-180" : "")} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                    Custom Time Settings
-                </button>
-                
-                {#if showCustomTime}
-                    <div class="mt-4 space-y-4 p-4 bg-gray-50 dark:bg-zinc-800 rounded-lg">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Focus Time</label>
-                            <div class="flex gap-2 items-center">
-                                <input
-                                    type="number"
-                                    bind:value={customMinutes}
-                                    onchange={() => { customMinutes = validateTimeInput(customMinutes, 99); setCustomTime(); }}
-                                    min="0"
-                                    max="99"
-                                    class="w-20 px-3 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded text-center"
-                                    disabled={isRunning}
-                                />
-                                <span class="text-gray-600 dark:text-zinc-400">:</span>
-                                <input
-                                    type="number"
-                                    bind:value={customSeconds}
-                                    onchange={() => { customSeconds = validateTimeInput(customSeconds, 59); setCustomTime(); }}
-                                    min="0"
-                                    max="59"
-                                    class="w-20 px-3 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded text-center"
-                                    disabled={isRunning}
-                                />
-                                <span class="text-sm text-gray-600 dark:text-zinc-400">min : sec</span>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Break Time</label>
-                            <div class="flex gap-2 items-center">
-                                <input
-                                    type="number"
-                                    bind:value={customBreakMinutes}
-                                    onchange={() => { customBreakMinutes = validateTimeInput(customBreakMinutes, 99); setCustomTime(); }}
-                                    min="0"
-                                    max="99"
-                                    class="w-20 px-3 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded text-center"
-                                    disabled={isRunning}
-                                />
-                                <span class="text-gray-600 dark:text-zinc-400">:</span>
-                                <input
-                                    type="number"
-                                    bind:value={customBreakSeconds}
-                                    onchange={() => { customBreakSeconds = validateTimeInput(customBreakSeconds, 59); setCustomTime(); }}
-                                    min="0"
-                                    max="59"
-                                    class="w-20 px-3 py-2 bg-white dark:bg-zinc-900 border border-gray-300 dark:border-zinc-700 rounded text-center"
-                                    disabled={isRunning}
-                                />
-                                <span class="text-sm text-gray-600 dark:text-zinc-400">min : sec</span>
-                            </div>
-                        </div>
-                    </div>
+
+            <div class="flex gap-3 justify-center mb-6">
+                {#if !isRunning}
+                    <ToolButton onclick={startTimer}>
+                        <i class="fa-solid fa-play"></i>
+                        Start
+                    </ToolButton>
+                {:else}
+                    <ToolButton variant="danger" onclick={stopTimer}>
+                        <i class="fa-solid fa-pause"></i>
+                        Pause
+                    </ToolButton>
                 {/if}
+                <ToolButton variant="secondary" onclick={resetTimer}>
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Reset
+                </ToolButton>
             </div>
-            
-            <div class="flex gap-4 justify-center">
+
+            <!-- Mode switches -->
+            <div class="flex gap-2 justify-center mb-6">
                 <button
-                    onclick={() => { isBreak = false; minutes = customMinutes; seconds = customSeconds; stopTimer(); }}
-                    class={"px-4 py-2 rounded-lg transition-colors " + (!isBreak ? "bg-black dark:bg-white text-white dark:text-black" : "bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400 hover:bg-gray-200 dark:hover:bg-zinc-700")}
+                    onclick={() => switchMode(false)}
+                    class="mode-btn"
+                    class:active={!isBreak}
                 >
-                    Focus ({customMinutes}m {customSeconds > 0 ? customSeconds + 's' : ''})
+                    Focus ({focusMinutes}m)
                 </button>
                 <button
-                    onclick={() => { isBreak = true; minutes = customBreakMinutes; seconds = customBreakSeconds; stopTimer(); }}
-                    class={"px-4 py-2 rounded-lg transition-colors " + (isBreak ? "bg-black dark:bg-white text-white dark:text-black" : "bg-gray-50 dark:bg-zinc-800 text-gray-600 dark:text-zinc-400 hover:bg-gray-200 dark:hover:bg-zinc-700")}
+                    onclick={() => switchMode(true)}
+                    class="mode-btn"
+                    class:active={isBreak}
                 >
-                    Break ({customBreakMinutes}m {customBreakSeconds > 0 ? customBreakSeconds + 's' : ''})
+                    Break ({breakMinutes}m)
                 </button>
             </div>
-        </div>
-        
-        <div class="bg-white dark:bg-zinc-900 rounded-lg p-6 border border-gray-200 dark:border-zinc-800">
-            <h2 class="text-2xl font-bold mb-4 poppins text-gray-900 dark:text-white">Todo List</h2>
-            
-            <form onsubmit={(e) => { e.preventDefault(); addTodo(); }} class="mb-4">
-                <div class="flex gap-2">
+
+            <!-- Settings -->
+            <div class="settings">
+                <div class="setting-row">
+                    <label>Focus (min)</label>
                     <input
-                        type="text"
-                        bind:value={newTodo}
-                        placeholder="Add a new task..."
-                        class="flex-1 px-4 py-2 bg-gray-50 dark:bg-zinc-800 border border-gray-200 dark:border-zinc-800 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-black dark:focus:border-white"
+                        type="number"
+                        bind:value={focusMinutes}
+                        min="1"
+                        max="99"
+                        disabled={isRunning}
+                        class="setting-input"
                     />
-                    <button
-                        type="submit"
-                        class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-                    >
-                        Add
-                    </button>
                 </div>
+                <div class="setting-row">
+                    <label>Break (min)</label>
+                    <input
+                        type="number"
+                        bind:value={breakMinutes}
+                        min="1"
+                        max="99"
+                        disabled={isRunning}
+                        class="setting-input"
+                    />
+                </div>
+            </div>
+        </ToolSection>
+
+        <!-- Todo List -->
+        <ToolSection title="Tasks">
+            <form onsubmit={(e) => { e.preventDefault(); addTodo(); }} class="flex gap-2 mb-4">
+                <input
+                    type="text"
+                    bind:value={newTodo}
+                    placeholder="Add a task..."
+                    class="todo-input"
+                />
+                <ToolButton type="submit">
+                    <i class="fa-solid fa-plus"></i>
+                </ToolButton>
             </form>
-            
-            <div class="space-y-2 max-h-96 overflow-y-auto">
+
+            <div class="todo-list">
                 {#each todos as todo (todo.id)}
-                    <div class="flex items-center gap-2 p-2 bg-gray-50 dark:bg-zinc-800 rounded-lg group">
+                    <div class="todo-item" class:completed={todo.completed}>
                         <input
                             type="checkbox"
                             checked={todo.completed}
                             onchange={() => toggleTodo(todo.id)}
-                            class="w-5 h-5 text-black dark:text-white bg-gray-100 dark:bg-zinc-700 border-gray-300 dark:border-gray-600 rounded focus:ring-black dark:focus:ring-white"
+                            class="todo-checkbox"
                         />
-                        
+
                         {#if editingId === todo.id}
                             <input
                                 type="text"
                                 bind:value={editingText}
-                                onkeydown={(e) => {
-                                    if (e.key === 'Enter') saveEdit();
-                                    if (e.key === 'Escape') cancelEdit();
-                                }}
-                                class="flex-1 px-2 py-1 bg-gray-100 dark:bg-zinc-700 border border-gray-200 dark:border-zinc-800 rounded text-gray-900 dark:text-white focus:outline-none focus:border-black dark:focus:border-white"
+                                onkeydown={(e) => { if (e.key === 'Enter') saveEdit(); if (e.key === 'Escape') editingId = null; }}
+                                class="todo-edit-input"
                                 autofocus
                             />
-                            <button
-                                onclick={saveEdit}
-                                class="p-1 text-green-500 hover:text-green-400"
-                            >
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                            </button>
-                            <button
-                                onclick={cancelEdit}
-                                class="p-1 text-red-500 hover:text-red-400"
-                            >
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
+                            <button onclick={saveEdit} class="todo-action save">
+                                <i class="fa-solid fa-check"></i>
                             </button>
                         {:else}
                             <span
-                                class={"flex-1 cursor-pointer " + (todo.completed ? "line-through text-gray-500" : "text-gray-900 dark:text-white")}
+                                class="todo-text"
                                 ondblclick={() => startEditing(todo.id, todo.text)}
                             >
                                 {todo.text}
                             </span>
-                            <button
-                                onclick={() => startEditing(todo.id, todo.text)}
-                                class="p-1 text-gray-600 dark:text-zinc-400 hover:text-black dark:hover:text-white opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                                </svg>
+                            <button onclick={() => startEditing(todo.id, todo.text)} class="todo-action edit">
+                                <i class="fa-solid fa-pen"></i>
                             </button>
-                            <button
-                                onclick={() => deleteTodo(todo.id)}
-                                class="p-1 text-gray-600 dark:text-zinc-400 hover:text-red-600 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
+                            <button onclick={() => deleteTodo(todo.id)} class="todo-action delete">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         {/if}
                     </div>
                 {:else}
-                    <p class="text-gray-500 text-center py-4">No tasks yet. Add one above!</p>
+                    <p class="empty-todos">No tasks yet. Add one above!</p>
                 {/each}
             </div>
-        </div>
+        </ToolSection>
     </div>
-</div>
+</ToolLayout>
+
+<style>
+    .timer-display {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .timer-time {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1;
+    }
+
+    .timer-label {
+        font-size: 1.25rem;
+        color: var(--accent);
+        margin-top: 0.5rem;
+    }
+
+    .mode-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .mode-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+    }
+
+    .settings {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .setting-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        align-items: center;
+    }
+
+    .setting-row label {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .setting-input {
+        width: 60px;
+        padding: 0.375rem;
+        text-align: center;
+        font-size: 0.875rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text-primary);
+    }
+
+    .setting-input:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+
+    .setting-input:disabled {
+        opacity: 0.5;
+    }
+
+    .todo-input {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+    }
+
+    .todo-input:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+
+    .todo-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .todo-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        max-height: 320px;
+        overflow-y: auto;
+    }
+
+    .todo-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+    }
+
+    .todo-item.completed .todo-text {
+        text-decoration: line-through;
+        color: var(--text-muted);
+    }
+
+    .todo-checkbox {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent);
+    }
+
+    .todo-text {
+        flex: 1;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+
+    .todo-edit-input {
+        flex: 1;
+        padding: 0.25rem 0.5rem;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+    }
+
+    .todo-action {
+        padding: 0.25rem;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.2s ease;
+    }
+
+    .todo-item:hover .todo-action {
+        opacity: 1;
+    }
+
+    .todo-action.edit:hover { color: var(--accent); }
+    .todo-action.delete:hover { color: #ef4444; }
+    .todo-action.save:hover { color: #22c55e; }
+
+    .empty-todos {
+        text-align: center;
+        padding: 2rem;
+        color: var(--text-muted);
+        font-size: 0.875rem;
+    }
+</style>

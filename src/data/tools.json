@@ -1,0 +1,44 @@
+[
+    {
+        "slug": "uuid",
+        "title": "UUID Generator",
+        "description": "Generate UUID v1 and v4 with customization options",
+        "icon": "fa-solid fa-fingerprint",
+        "tags": ["Generator", "Utility"]
+    },
+    {
+        "slug": "json-lint",
+        "title": "JSON Lint",
+        "description": "Validate, beautify, and compress JSON data",
+        "icon": "fa-solid fa-code",
+        "tags": ["JSON", "Formatter"]
+    },
+    {
+        "slug": "json-escape",
+        "title": "JSON Escape",
+        "description": "Escape and unescape JSON strings",
+        "icon": "fa-solid fa-shield-halved",
+        "tags": ["JSON", "Utility"]
+    },
+    {
+        "slug": "jwt-parser",
+        "title": "JWT Parser",
+        "description": "Decode and encode JWT tokens",
+        "icon": "fa-solid fa-key",
+        "tags": ["Security", "JWT"]
+    },
+    {
+        "slug": "base64",
+        "title": "Base64 Encoder",
+        "description": "Encode and decode Base64 strings",
+        "icon": "fa-solid fa-lock",
+        "tags": ["Encoder", "Utility"]
+    },
+    {
+        "slug": "pomodoro",
+        "title": "Pomodoro Timer",
+        "description": "Focus timer with customizable intervals",
+        "icon": "fa-solid fa-clock",
+        "tags": ["Productivity", "Timer"]
+    }
+]

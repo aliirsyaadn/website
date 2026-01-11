@@ -1,0 +1,35 @@
+[
+    {
+        "slug": "getting-started-with-golang",
+        "title": "Getting Started with Golang for Backend Development",
+        "excerpt": "A comprehensive guide to starting your journey with Go for building robust backend services.",
+        "content": "# Getting Started with Golang\n\nGo is a statically typed, compiled programming language designed at Google...",
+        "image": "/images/blog/golang-intro.png",
+        "tags": ["Go", "Backend", "Tutorial"],
+        "date": "2024-01-15",
+        "readTime": "8 min read",
+        "views": 1250
+    },
+    {
+        "slug": "microservices-best-practices",
+        "title": "Microservices Best Practices I Learned at Tokopedia",
+        "excerpt": "Key lessons and patterns from building microservices at scale in one of Indonesia's largest tech companies.",
+        "content": "# Microservices Best Practices\n\nDuring my time at Tokopedia, I learned valuable lessons about building scalable microservices...",
+        "image": "/images/blog/microservices.png",
+        "tags": ["Microservices", "Architecture", "Go", "gRPC"],
+        "date": "2023-11-20",
+        "readTime": "12 min read",
+        "views": 2340
+    },
+    {
+        "slug": "graphql-vs-rest",
+        "title": "GraphQL vs REST: When to Use What",
+        "excerpt": "A practical comparison of GraphQL and REST APIs based on real-world experience.",
+        "content": "# GraphQL vs REST\n\nChoosing between GraphQL and REST depends on your specific use case...",
+        "image": "/images/blog/graphql-rest.png",
+        "tags": ["GraphQL", "REST", "API Design"],
+        "date": "2023-09-05",
+        "readTime": "10 min read",
+        "views": 1890
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "slug": "sid-malang",
+        "title": "SID Malang Medina City",
+        "description": "Information system for internal dashboard of Malang Medina City. Planning, designing, and developing a web-based information system for internal use, including a dashboard for monitoring and managing data.",
+        "image": "/images/projects/sid-malang.png",
+        "tags": ["Python", "Django", "PostgreSQL", "Firebase"],
+        "github": null,
+        "demo": null,
+        "featured": true,
+        "date": "2021-01-15"
+    },
+    {
+        "slug": "proyekin",
+        "title": "Proyekin",
+        "description": "Freelancer web platform for Fasilkom UI. Developed and implemented a Golang API with Design Pattern for efficient services, including notification and chat room endpoints.",
+        "image": "/images/projects/proyekin.png",
+        "tags": ["Go", "PostgreSQL", "REST API"],
+        "github": null,
+        "demo": null,
+        "featured": true,
+        "date": "2020-08-10"
+    },
+    {
+        "slug": "reviewin",
+        "title": "Reviewin",
+        "description": "Peer-based CV Review Platform. Developed a GraphQL API backend with seamless integration, implemented JWT-based authentication for secure access.",
+        "image": "/images/projects/reviewin.png",
+        "tags": ["Go", "PostgreSQL", "GraphQL", "Nginx", "JWT"],
+        "github": null,
+        "demo": null,
+        "featured": true,
+        "date": "2020-06-20"
+    }
+]

@@ -1,0 +1,38 @@
+[
+    {
+        "company": "Paper.id",
+        "href": "https://paper.id",
+        "role": "Software Engineer II",
+        "type": "Fulltime",
+        "period": "July 2024 - Present",
+        "description": "Developing custom enterprise solutions with AI-driven features including OCR and automated payment reconciliation. Led Go-Live for multiple enterprise projects (CSA, Qoala, JAPFA). Recognized with 'User is Our Boss' award for customer focus.",
+        "techstacks": ["Go", "RabbitMQ", "MySQL", "GCP", "AI/OCR"]
+    },
+    {
+        "company": "Mindtera",
+        "href": "https://mindtera.com",
+        "role": "Software Engineer",
+        "type": "Fulltime",
+        "period": "December 2022 - July 2024",
+        "description": "Developed and maintained a microservice architecture containing nine services for a fast-growing SaaS platform. Implemented best practices with Go, gRPC, and Kubernetes while collaborating with cross-functional teams.",
+        "techstacks": ["Go", "gRPC", "Kubernetes", "PostgreSQL", "Redis", "Docker"]
+    },
+    {
+        "company": "Tokopedia",
+        "href": "https://tokopedia.com",
+        "role": "Software Engineer",
+        "type": "Fulltime",
+        "period": "August 2021 - November 2022",
+        "description": "Developed hotel agent integration project using Go, enabling platform expansion. Designed data synchronization between ElasticSearch and MySQL using NSQ. Conducted unit and integration testing with monitoring via NewRelic and Jenkins.",
+        "techstacks": ["Go", "gRPC", "GraphQL", "MySQL", "Elasticsearch", "NSQ", "Jenkins", "NewRelic"]
+    },
+    {
+        "company": "SayaKaya",
+        "href": "https://sayakaya.id",
+        "role": "Fullstack Engineer",
+        "type": "Internship",
+        "period": "June 2021 - August 2021",
+        "description": "Created GraphQL API backend from scratch for scheduling financial planner feature using Go. Implemented JWT authentication system and developed frontend admin dashboard using SvelteJS.",
+        "techstacks": ["Go", "GraphQL", "JWT", "Svelte", "PostgreSQL"]
+    }
+]
