@@ -40,5 +40,12 @@
         "description": "Focus timer with customizable intervals",
         "icon": "fa-solid fa-clock",
         "tags": ["Productivity", "Timer"]
+    },
+    {
+        "slug": "password-generator",
+        "title": "Password Generator",
+        "description": "Create secure, random passwords with customizable parameters",
+        "icon": "fa-solid fa-key",
+        "tags": ["Security", "Generator"]
     }
 ]

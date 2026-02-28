@@ -1,4 +1,6 @@
 <script>
+    import { theme } from "$lib/theme";
+    import { reveal } from "$lib/animations";
     import Project from "./Project.svelte";
     import Experience from "./Experience.svelte";
     import Contact from "./Contact.svelte";
@@ -9,21 +11,24 @@
             name: "SID Malang Medina City",
             icon: "fa-solid fa-diagram-project",
             title: "Information system for internal dashboard of Malang Medina City.",
-            description: "Planning, designing, and developing a web-based information system for internal use, including a dashboard for monitoring and managing data. Developed with Python (Django)",
+            description:
+                "Planning, designing, and developing a web-based information system for internal use, including a dashboard for monitoring and managing data. Developed with Python (Django)",
             techstacks: ["PYTHON", "DJANGO", "POSTGRESQL", "FIREBASE"],
         },
         {
             name: "Proyekin",
             icon: "fa-solid fa-puzzle-piece",
             title: "Freelancer web platform for Fasilkom UI",
-            description: "Developed and implemented a Golang API with Design Pattern for efficient services, including notification and chat room endpoints, alongside PostgreSQL queries for data accuracy.",
-            techstacks: ["GO", "POSTGRESQL",],
+            description:
+                "Developed and implemented a Golang API with Design Pattern for efficient services, including notification and chat room endpoints, alongside PostgreSQL queries for data accuracy.",
+            techstacks: ["GO", "POSTGRESQL"],
         },
         {
             name: "Reviewin",
             icon: "fa-solid fa-list-check",
             title: "Peer-based CV Review Platform",
-            description: "Developed a GraphQL API backend with seamless integration, implemented JWT-based authentication for secure access, and created a cron program for data synchronization, ensuring constant data accuracy.",
+            description:
+                "Developed a GraphQL API backend with seamless integration, implemented JWT-based authentication for secure access, and created a cron program for data synchronization, ensuring constant data accuracy.",
             techstacks: ["GO", "POSTGRESQL", "GRAPHQL", "NGINX"],
         },
     ]);
@@ -33,21 +38,28 @@
             number: 1,
             company: "Paper.id - Fulltime",
             href: "https://paper.id",
-            role : "Software Engineer II",
+            role: "Software Engineer II",
             period: "July 2024 - Present",
             description:
                 "Served as Software Engineer II at Paper.id, developing microservices for a rapidly scaling SaaS platform. Collaborated cross-functionally to ensure seamless integration and utilized cutting-edge tools to optimize performance and reliability, while maintaining a focus on scalability and reliability.",
-            techstacks: ["GO", "MYSQL", "REDIS", "DOCKER", "KUBERNETES",],
+            techstacks: ["GO", "MYSQL", "REDIS", "DOCKER", "KUBERNETES"],
         },
         {
             number: 2,
             company: "Mindtera - Fulltime",
             href: "https://mindtera.com",
-            role : "Software Engineer",
+            role: "Software Engineer",
             period: "December 2022 - July 2024",
             description:
                 "Leading development and maintenance of a nine-service microservice for a rapidly scaling SaaS platform, collaborating cross-functionally for seamless integration, and utilizing cutting-edge tools to optimize performance and reliability.",
-            techstacks: ["GO", "GRPC", "POSTGRESQL", "REDIS", "DOCKER", "KUBERNETES",],
+            techstacks: [
+                "GO",
+                "GRPC",
+                "POSTGRESQL",
+                "REDIS",
+                "DOCKER",
+                "KUBERNETES",
+            ],
         },
         {
             number: 3,
@@ -57,7 +69,17 @@
             period: "August 2021 - November 2022",
             description:
                 "I created a Golang-based agent integration project for Tokopedia, expanding offerings, synchronized data between ElasticSearch and MySQL using NSQ for consistency, conducted unit and integration testing (GQL, gRPC), and monitored deployments with NewRelic and Jenkins for quality assurance.",
-            techstacks: ["GO", "GRPC", "GRAPHQL", "MYSQL", "POSTGRESQL", "REDIS", "ELASTICSEARCH", "JENKINS", "NGINX"],
+            techstacks: [
+                "GO",
+                "GRPC",
+                "GRAPHQL",
+                "MYSQL",
+                "POSTGRESQL",
+                "REDIS",
+                "ELASTICSEARCH",
+                "JENKINS",
+                "NGINX",
+            ],
         },
         {
             number: 4,
@@ -67,9 +89,9 @@
             period: "June 2021 - August 2021",
             description:
                 "Built a <strong class='text-blue-500'>GraphQL API</strong> backend in Golang for a financial planner feature, implemented JWT authentication, and crafted a user-friendly admin dashboard with SvelteJS for seamless scheduling and management of financial plans.",
-            techstacks: ["GO", "JAVASCRIPT", "SVELTE", "POSTGRESQL", "GRAPHQL",],
+            techstacks: ["GO", "JAVASCRIPT", "SVELTE", "POSTGRESQL", "GRAPHQL"],
         },
-    ])
+    ]);
 
     let benefits = $state([
         {
@@ -98,30 +120,49 @@
         <div
             class="flex flex-col lg:justify-center text-center lg:text-left gap-6 md:gap-8 lg:gap-10"
         >
-            
             <h2 class="font-semibold text-4xl sm:text-5xl md:text-6xl">
                 Hi! I'm <span class="poppins">Ali Irsyaad</span>,
-                <br /> 
+                <br />
                 a <span class="poppins">Software</span> Engineer
             </h2>
             <p class="text-base sm:text-lg md:text-xl">
-             Specializing in <span class="font-semibold">Backend Engineering</span> with Go and Python.
-             <br>
+                Specializing in <span class="font-semibold"
+                    >Backend Engineering</span
+                >
+                with Go and Python.
+                <br />
             </p>
-            <div class="flex justify-center lg:justify-start ">
+            <div class="flex justify-center lg:justify-start">
                 <Contact />
-              </div>
+            </div>
         </div>
         <div class="relative grid place-items-center">
             <!-- svelte-ignore a11y_img_redundant_alt -->
-            <img
-                src={"images/profile.png"}
-                alt="Ali Irsyaad"
-                class="object-cover z-[2] max-h-[70vh]"
-            />
+            {#if $theme === "serious"}
+                <div class="relative">
+                    <img
+                        src={"/images/profile.png"}
+                        alt="Serious Ali Irsyaad"
+                        class="object-cover z-[2] max-h-[70vh] relative"
+                    />
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-transparent to-black opacity-50 z-[1]"
+                    ></div>
+                </div>
+            {:else}
+                <img
+                    src={"/images/profile2.png"}
+                    alt="Fun Ali Irsyaad"
+                    class="object-cover z-[2] max-h-[70vh]"
+                />
+            {/if}
         </div>
     </section>
-    <section class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24" id="experiences">
+    <section
+        class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24"
+        id="experiences"
+        use:reveal={{ duration: "0.8s", distance: "40px" }}
+    >
         <div class="flex flex-col gap-2 text-center">
             <!-- <h6 class="text-large sm:text-xl md:text-2xl">
                 A few of my creative endeavors.
@@ -130,16 +171,21 @@
                 My <span class="poppins">Career</span> Journey
             </h3>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
+        <div
+            class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10"
+        >
             {#each experiences as experience}
-                <Experience data={experience} > 
+                <Experience data={experience}>
                     <Techstack techstacks={experience.techstacks} />
                 </Experience>
             {/each}
-
         </div>
     </section>
-    <section class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24" id="projects">
+    <section
+        class="py-20 lg:py-32 flex flex-col gap-24 px-8 md:px-16 lg:px-24"
+        id="projects"
+        use:reveal={{ duration: "0.8s", distance: "40px" }}
+    >
         <div class="flex flex-col gap-2 text-center">
             <!-- <h6 class="text-large sm:text-xl md:text-2xl">
                 A few of my creative endeavors.
@@ -156,19 +202,20 @@
             <i class="fa-regular fa-circle-play" />
             <p>Watch the video</p>
         </a> -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10">
-
+        <div
+            class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-12 lg:gap-10"
+        >
             {#each projects as project}
-                <Project data={project} > 
+                <Project data={project}>
                     <Techstack techstacks={project.techstacks} />
                 </Project>
             {/each}
-            
         </div>
     </section>
     <section
         id="about"
         class="py-20 pt-10 lg:pt-16 lg:py-32 flex flex-col gap-16 sm:gap-20 md:gap-24 relative px-8 md:px-16 lg:px-24"
+        use:reveal={{ duration: "0.8s", distance: "40px" }}
     >
         <div
             class="flex flex-col gap-2 text-center relative before:absolute before:top-0 before:left-0 before:w-2/3 before:h-1.5 before:bg-black dark:before:bg-white after:absolute after:bottom-0 after:right-0 after:w-2/3 after:h-1.5 after:bg-black dark:after:bg-white py-4"

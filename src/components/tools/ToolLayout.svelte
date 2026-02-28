@@ -1,5 +1,10 @@
 <script>
-    let { title, description, icon = 'fa-solid fa-wrench', children } = $props();
+    let {
+        title,
+        description,
+        icon = "fa-solid fa-wrench",
+        children,
+    } = $props();
 </script>
 
 <svelte:head>
@@ -10,10 +15,12 @@
 <div class="tool-page page-enter">
     <!-- Header -->
     <div class="tool-header">
-        <div class="tool-icon">
-            <i class={icon}></i>
+        <div class="flex items-center gap-4 mb-2">
+            <div class="tool-icon">
+                <i class={icon}></i>
+            </div>
+            <h1 class="tool-title font-display">{title}</h1>
         </div>
-        <h1 class="tool-title font-display">{title}</h1>
         {#if description}
             <p class="tool-description">{description}</p>
         {/if}
@@ -35,13 +42,12 @@
     }
 
     .tool-icon {
-        width: 64px;
-        height: 64px;
-        border-radius: 16px;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.5rem;
         background: var(--bg-secondary);
         border: 1px solid var(--border);
         font-size: 1.5rem;
@@ -49,11 +55,14 @@
     }
 
     .tool-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
         font-weight: 700;
         color: var(--text-primary);
-        margin-bottom: 0.5rem;
-        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        background: linear-gradient(
+            135deg,
+            var(--gradient-start),
+            var(--gradient-end)
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;

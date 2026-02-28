@@ -1,38 +1,37 @@
-import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-// Theme modes: 'serious' | 'fun'
 const THEME_KEY = 'site-theme-mode';
 
-function createThemeStore() {
-    const { subscribe, set, update } = writable('serious');
+function createThemeManager() {
+    let currentMode = $state('serious');
 
     return {
-        subscribe,
+        get value() {
+            return currentMode;
+        },
         init() {
             if (browser) {
                 const stored = localStorage.getItem(THEME_KEY);
                 const mode = stored || 'serious';
-                set(mode);
+                currentMode = mode;
                 document.documentElement.setAttribute('data-theme', mode);
                 document.documentElement.classList.remove('serious', 'fun');
                 document.documentElement.classList.add(mode);
             }
         },
         toggle() {
-            update(current => {
-                const newMode = current === 'serious' ? 'fun' : 'serious';
-                if (browser) {
-                    localStorage.setItem(THEME_KEY, newMode);
-                    document.documentElement.setAttribute('data-theme', newMode);
-                    document.documentElement.classList.remove('serious', 'fun');
-                    document.documentElement.classList.add(newMode);
-                }
-                return newMode;
-            });
+            const newMode = currentMode === 'serious' ? 'fun' : 'serious';
+            currentMode = newMode;
+            if (browser) {
+                localStorage.setItem(THEME_KEY, newMode);
+                document.documentElement.setAttribute('data-theme', newMode);
+                document.documentElement.classList.remove('serious', 'fun');
+                document.documentElement.classList.add(newMode);
+            }
+            return newMode;
         },
         setMode(mode) {
-            set(mode);
+            currentMode = mode;
             if (browser) {
                 localStorage.setItem(THEME_KEY, mode);
                 document.documentElement.setAttribute('data-theme', mode);
@@ -43,4 +42,4 @@ function createThemeStore() {
     };
 }
 
-export const theme = createThemeStore();
+export const themeState = createThemeManager();

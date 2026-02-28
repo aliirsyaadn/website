@@ -1,37 +1,34 @@
 <script>
-    import { page } from '$app/stores';
-    import { theme } from '$lib/theme.js';
+    import { page } from "$app/stores";
+    import { themeState } from "$lib/theme.svelte.js";
 
     let { scrollY = 0 } = $props();
 
-    let currentTheme = $state('serious');
     let isScrolled = $derived(scrollY > 50);
     let currentPath = $derived($page.url.pathname);
 
-    theme.subscribe(value => {
-        currentTheme = value;
-    });
-
     const navLinks = [
-        { href: '/', label: 'Home' },
-        { href: '/projects', label: 'Projects' },
-        { href: '/blog', label: 'Blog' },
-        { href: '/tools', label: 'Tools' },
-        { href: '/about', label: 'About' }
+        { href: "/", label: "Home" },
+        { href: "/projects", label: "Projects" },
+        { href: "/blog", label: "Blog" },
+        { href: "/tools", label: "Tools" },
+        { href: "/about", label: "About" },
     ];
 
     function isActive(href) {
-        if (href === '/') return currentPath === '/';
+        if (href === "/") return currentPath === "/";
         return currentPath.startsWith(href);
     }
 
     function toggleTheme() {
-        theme.toggle();
+        themeState.toggle();
     }
 </script>
 
 <nav
-    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 {isScrolled ? 'top-4' : 'top-6'}"
+    class="fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 {isScrolled
+        ? 'top-4'
+        : 'top-6'}"
 >
     <div class="glass rounded-full px-2 py-2 flex items-center gap-1">
         <!-- Logo/Name -->
@@ -53,9 +50,11 @@
                     href={link.href}
                     class="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200
                         {isActive(link.href)
-                            ? 'text-accent-gradient'
-                            : 'hover:bg-[var(--bg-tertiary)]'}"
-                    style="color: {isActive(link.href) ? 'var(--accent)' : 'var(--text-secondary)'};"
+                        ? 'text-accent-gradient'
+                        : 'hover:bg-[var(--bg-tertiary)]'}"
+                    style="color: {isActive(link.href)
+                        ? 'var(--accent)'
+                        : 'var(--text-secondary)'};"
                 >
                     {link.label}
                 </a>
@@ -68,17 +67,35 @@
         <!-- Theme Toggle -->
         <button
             onclick={toggleTheme}
-            class="px-3 py-2 rounded-full transition-all duration-300 hover:bg-[var(--bg-tertiary)] flex items-center gap-2 text-sm font-medium cursor-pointer"
-            style="color: var(--text-secondary);"
+            class="relative w-[3.25rem] h-[1.75rem] rounded-full transition-colors duration-300 ml-2 shadow-inner overflow-hidden cursor-pointer flex items-center px-1
+                {themeState.value === 'serious'
+                ? 'bg-[#1a1a2e] border border-[var(--border)]'
+                : 'bg-[#e2e8f0] border border-gray-300'}"
             aria-label="Toggle theme"
         >
-            {#if currentTheme === 'serious'}
-                <i class="fa-solid fa-briefcase text-xs"></i>
-                <span class="hidden sm:inline">Serious</span>
-            {:else}
-                <i class="fa-solid fa-rocket text-xs"></i>
-                <span class="hidden sm:inline">Fun</span>
-            {/if}
+            <!-- Background Icons -->
+            <div
+                class="absolute inset-0 flex justify-between items-center px-[6px] text-[11px] pointer-events-none w-full h-full"
+            >
+                <i
+                    class="fa-solid fa-briefcase {themeState.value === 'serious'
+                        ? 'text-white'
+                        : 'text-gray-400'}"
+                ></i>
+                <i
+                    class="fa-solid fa-rocket {themeState.value === 'serious'
+                        ? 'text-gray-600'
+                        : 'text-black'}"
+                ></i>
+            </div>
+
+            <!-- Sliding Circle -->
+            <div
+                class="absolute w-[1.25rem] h-[1.25rem] rounded-full bg-white transition-transform duration-300 shadow-md transform
+                    {themeState.value === 'serious'
+                    ? 'translate-x-0'
+                    : 'translate-x-[1.5rem]'}"
+            ></div>
         </button>
     </div>
 </nav>

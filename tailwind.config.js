@@ -15,16 +15,16 @@ export default {
           text: '#fafafa',
           muted: '#a1a1aa',
         },
-        // Fun mode - Playful gradients and vibrant colors
+        // Fun mode - Playful gradients on light background
         fun: {
-          bg: '#0f0f23',
-          surface: '#1a1a2e',
-          border: '#2d2d44',
-          accent: '#06b6d4',
-          'accent-alt': '#a855f7',
-          'accent-pink': '#ec4899',
-          text: '#f8fafc',
-          muted: '#94a3b8',
+          bg: '#f8fafc',
+          surface: '#ffffff',
+          border: '#e2e8f0',
+          accent: '#ec4899',
+          'accent-alt': '#8b5cf6',
+          'accent-pink': '#f43f5e',
+          text: '#0f172a',
+          muted: '#64748b',
         }
       },
       fontFamily: {

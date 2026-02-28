@@ -24,21 +24,21 @@
 }
 
 html.fun {
-    /* Fun mode - Colorful & Playful */
-    --bg-primary: #0f0515;
-    --bg-secondary: #1a0a25;
-    --bg-tertiary: #251535;
-    --surface: #1a0a25;
-    --border: #3d2050;
-    --accent: #ff6b9d;
-    --accent-light: #ff9ec4;
-    --accent-glow: rgba(255, 107, 157, 0.4);
-    --text-primary: #ffffff;
-    --text-secondary: #c4b5d0;
-    --text-muted: #8b7a9e;
-    --gradient-start: #ff6b9d;
-    --gradient-mid: #ffd93d;
-    --gradient-end: #6bcfff;
+    /* Fun mode - Colorful & Playful (Light Theme) */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f1f5f9;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --accent: #ec4899;
+    --accent-light: #f472b6;
+    --accent-glow: rgba(236, 72, 153, 0.3);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --gradient-start: #ec4899;
+    --gradient-mid: #f59e0b;
+    --gradient-end: #0ea5e9;
 }
 
 html {
@@ -53,7 +53,8 @@ body {
     min-height: 100vh;
 }
 
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
 }
@@ -67,7 +68,12 @@ body, html {
     font-family: 'JetBrains Mono', monospace;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
 }
@@ -114,9 +120,68 @@ h1, h2, h3, h4, h5, h6 {
 /* Grid background pattern */
 .bg-grid {
     background-image:
-        linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 60px 60px;
+}
+
+/* Dynamic Background Implementations */
+
+/* Serious Mode: Subtle Glowing Grid */
+.bg-serious-grid {
+    background-size: 40px 40px;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+}
+
+.animate-glow-pulse {
+    animation: glow-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    0% {
+        transform: scale(1) translate(-50%, -50%);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1) translate(-45%, -45%);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0.9) translate(-55%, -55%);
+        opacity: 0.5;
+    }
+}
+
+/* Fun Mode: Animated Mesh Gradient */
+.mesh-gradient {
+    background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(at 0% 0%, hsla(340, 100%, 76%, 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(189, 100%, 56%, 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(38, 100%, 74%, 0.4) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(271, 91%, 65%, 0.4) 0px, transparent 50%);
+    background-size: 200% 200%;
+    animation: mesh-morph 15s ease infinite alternate;
+}
+
+@keyframes mesh-morph {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 100%;
+    }
 }
 
 /* Noise texture overlay */
@@ -223,12 +288,11 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border);
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 30px var(--accent-glow);
 }
 
 html.fun .glass {
-    background: rgba(15, 5, 21, 0.85);
-    box-shadow: 0 0 30px rgba(255, 107, 157, 0.15);
+    background: rgba(255, 255, 255, 0.85);
 }
 
 /* Fun mode rainbow text */
@@ -242,8 +306,15 @@ html.fun .text-accent-gradient {
 }
 
 @keyframes rainbow {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 /* Fun mode colorful tags */
@@ -258,13 +329,11 @@ html.fun .tag-accent {
     content: '';
     position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.1) 0px,
-        rgba(0, 0, 0, 0.1) 1px,
-        transparent 1px,
-        transparent 2px
-    );
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.1) 0px,
+            rgba(0, 0, 0, 0.1) 1px,
+            transparent 1px,
+            transparent 2px);
     pointer-events: none;
     opacity: 0.3;
 }
@@ -280,7 +349,9 @@ html.fun .tag-accent {
 }
 
 @keyframes blink {
-    50% { opacity: 0; }
+    50% {
+        opacity: 0;
+    }
 }
 
 /* Animated gradient border */
@@ -371,6 +442,7 @@ html.fun .tag-accent {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -383,16 +455,45 @@ html.fun .tag-accent {
     animation: slideUp 0.5s ease-out forwards;
 }
 
-.stagger-item:nth-child(1) { animation-delay: 0.1s; }
-.stagger-item:nth-child(2) { animation-delay: 0.2s; }
-.stagger-item:nth-child(3) { animation-delay: 0.3s; }
-.stagger-item:nth-child(4) { animation-delay: 0.4s; }
-.stagger-item:nth-child(5) { animation-delay: 0.5s; }
-.stagger-item:nth-child(6) { animation-delay: 0.6s; }
-.stagger-item:nth-child(7) { animation-delay: 0.7s; }
-.stagger-item:nth-child(8) { animation-delay: 0.8s; }
-.stagger-item:nth-child(9) { animation-delay: 0.9s; }
-.stagger-item:nth-child(10) { animation-delay: 1s; }
+.stagger-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.stagger-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.stagger-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.stagger-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.stagger-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.stagger-item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.stagger-item:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.stagger-item:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.stagger-item:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+.stagger-item:nth-child(10) {
+    animation-delay: 1s;
+}
 
 /* Fun mode specific animations */
 html.fun .animate-gradient {
@@ -401,8 +502,15 @@ html.fun .animate-gradient {
 }
 
 @keyframes gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 /* Prose styles for blog content */
@@ -411,7 +519,10 @@ html.fun .animate-gradient {
     max-width: 65ch;
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
     color: var(--text-primary);
     margin-top: 2em;
     margin-bottom: 0.5em;
@@ -455,7 +566,8 @@ html.fun .animate-gradient {
     color: var(--text-muted);
 }
 
-.prose ul, .prose ol {
+.prose ul,
+.prose ol {
     padding-left: 1.5rem;
     margin-bottom: 1.25em;
 }
