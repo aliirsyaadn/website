@@ -6,6 +6,7 @@
 
     let isScrolled = $derived(scrollY > 50);
     let currentPath = $derived($page.url.pathname);
+    let isMobileMenuOpen = $state(false);
 
     const navLinks = [
         { href: "/", label: "Home" },
@@ -22,6 +23,14 @@
 
     function toggleTheme() {
         themeState.toggle();
+    }
+
+    function toggleMobileMenu() {
+        isMobileMenuOpen = !isMobileMenuOpen;
+    }
+
+    function closeMobileMenu() {
+        isMobileMenuOpen = false;
     }
 </script>
 
@@ -43,8 +52,8 @@
         <!-- Divider -->
         <div class="w-px h-6 bg-[var(--border)]"></div>
 
-        <!-- Nav Links -->
-        <div class="flex items-center">
+        <!-- Desktop Nav Links -->
+        <div class="hidden md:flex items-center">
             {#each navLinks as link}
                 <a
                     href={link.href}
@@ -93,11 +102,47 @@
             <div
                 class="absolute w-[1.25rem] h-[1.25rem] rounded-full bg-white transition-transform duration-300 shadow-md transform
                     {themeState.value === 'serious'
-                    ? 'translate-x-0'
+                    ? 'translate-x-[0]'
                     : 'translate-x-[1.5rem]'}"
             ></div>
         </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button
+            class="md:hidden ml-2 w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-[var(--bg-tertiary)]"
+            style="color: var(--text-primary);"
+            onclick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+        >
+            <i class="fa-solid {isMobileMenuOpen ? 'fa-xmark' : 'fa-bars'}"></i>
+        </button>
     </div>
+
+    <!-- Mobile Dropdown Menu -->
+    {#if isMobileMenuOpen}
+        <!-- svelte-ignore a11y_no_static_element_interactions -->
+        <!-- svelte-ignore a11y_click_events_have_key_events -->
+        <div
+            class="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[90vw] max-w-[320px] rounded-2xl glass p-4 flex flex-col gap-2 md:hidden"
+            onclick={(e) => e.target === e.currentTarget && closeMobileMenu()}
+        >
+            {#each navLinks as link}
+                <a
+                    href={link.href}
+                    onclick={closeMobileMenu}
+                    class="px-4 py-3 text-base text-center font-medium rounded-xl transition-all duration-200
+                        {isActive(link.href)
+                        ? 'text-accent-gradient bg-[var(--bg-tertiary)]'
+                        : 'hover:bg-[var(--bg-tertiary)]'}"
+                    style="color: {isActive(link.href)
+                        ? 'var(--accent)'
+                        : 'var(--text-secondary)'};"
+                >
+                    {link.label}
+                </a>
+            {/each}
+        </div>
+    {/if}
 </nav>
 
 <style>

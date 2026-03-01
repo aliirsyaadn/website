@@ -92,7 +92,7 @@
             </div>
 
             <!-- Info -->
-            <div class="flex flex-col justify-center">
+            <div class="flex flex-col justify-center text-center lg:text-left">
                 <h1 class="text-4xl sm:text-5xl font-display font-bold mb-6">
                     About <span class="text-accent-gradient">Me</span>
                 </h1>
@@ -144,7 +144,7 @@
                 </div>
 
                 <!-- CTA -->
-                <div class="flex gap-4">
+                <div class="flex justify-center lg:justify-start gap-4">
                     <a
                         href="mailto:aliirsyaadn@gmail.com"
                         class="btn-primary inline-flex items-center gap-2"

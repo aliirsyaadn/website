@@ -81,7 +81,7 @@
         {/if}
 
         <!-- Content -->
-        <div class="prose prose-lg">
+        <div class="prose sm:prose-lg max-w-none">
             <slot />
         </div>
 

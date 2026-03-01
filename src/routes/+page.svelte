@@ -36,7 +36,7 @@
 
 <!-- Hero Section -->
 <section
-    class="min-h-screen grid grid-cols-1 lg:grid-cols-2 items-center justify-center px-6 pt-24 pb-16"
+    class="min-h-screen grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-12 lg:gap-0 px-6 pt-32 lg:pt-24 pb-16"
 >
     <div class="max-w-4xl mx-auto text-center lg:text-left page-enter">
         <!-- Status Badge -->
@@ -55,7 +55,7 @@
 
         <!-- Main Title -->
         <h1
-            class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-tight"
+            class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-tight"
         >
             <span style="color: var(--text-primary);">I'm </span>
             <span class="text-accent-gradient">Ali Irsyaad</span>
@@ -118,7 +118,7 @@
                 <img
                     src={"/images/anime_profile_serious.png"}
                     alt="Serious Ali Irsyaad"
-                    class="object-cover relative z-[1] max-h-[70vh] saturate-0"
+                    class="object-cover relative z-[1] max-h-[50vh] lg:max-h-[70vh] saturate-0"
                 />
                 <div
                     class="absolute inset-0 bg-gradient-to-t from-transparent to-black z-[2]"
@@ -136,7 +136,7 @@
                 <img
                     src={"/images/anime_profile_fun.png"}
                     alt="Fun Ali Irsyaad"
-                    class="object-cover w-full h-full max-h-[70vh] z-[0] saturate-150"
+                    class="object-cover w-full h-full max-h-[50vh] lg:max-h-[70vh] z-[0] saturate-150"
                 />
             </div>
         </div>
