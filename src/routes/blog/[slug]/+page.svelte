@@ -107,7 +107,7 @@
                         style="background: var(--bg-secondary);"
                     >
                         <img
-                            src="/images/profile.png"
+                            src="/images/profile_ori.png"
                             alt="Ali Irsyaad"
                             class="w-full h-full object-cover"
                         />

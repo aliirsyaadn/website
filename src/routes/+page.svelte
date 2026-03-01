@@ -116,7 +116,7 @@
                 class:opacity-0={themeState.value !== "serious"}
             >
                 <img
-                    src={"/images/profile.png"}
+                    src={"/images/anime_profile_serious.png"}
                     alt="Serious Ali Irsyaad"
                     class="object-cover relative z-[1] max-h-[70vh] saturate-0"
                 />
@@ -134,7 +134,7 @@
                 class:opacity-0={themeState.value !== "fun"}
             >
                 <img
-                    src={"/images/profile2.png"}
+                    src={"/images/anime_profile_fun.png"}
                     alt="Fun Ali Irsyaad"
                     class="object-cover w-full h-full max-h-[70vh] z-[0] saturate-150"
                 />

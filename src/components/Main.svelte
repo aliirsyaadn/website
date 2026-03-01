@@ -141,7 +141,7 @@
             {#if $theme === "serious"}
                 <div class="relative">
                     <img
-                        src={"/images/profile.png"}
+                        src={"/images/anime_profile_serious.png"}
                         alt="Serious Ali Irsyaad"
                         class="object-cover z-[2] max-h-[70vh] relative"
                     />
@@ -151,7 +151,7 @@
                 </div>
             {:else}
                 <img
-                    src={"/images/profile2.png"}
+                    src={"/images/anime_profile_fun.png"}
                     alt="Fun Ali Irsyaad"
                     class="object-cover z-[2] max-h-[70vh]"
                 />
