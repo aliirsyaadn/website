@@ -184,6 +184,27 @@ h6 {
     }
 }
 
+/* Fun Mode floating blobs */
+.blob-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: -1;
+    opacity: 0.8;
+    animation: float-blob 20s infinite alternate ease-in-out;
+}
+
+.blob-1 { background: var(--accent); width: 600px; height: 600px; top: -10%; left: -10%; animation-delay: 0s; }
+.blob-2 { background: var(--gradient-mid); width: 700px; height: 700px; bottom: -20%; right: -10%; animation-delay: -5s; }
+.blob-3 { background: var(--gradient-end); width: 500px; height: 500px; top: 30%; left: 50%; transform: translateX(-50%); animation-delay: -10s; }
+
+@keyframes float-blob {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(50px, -50px) scale(1.05) rotate(5deg); }
+    66% { transform: translate(-30px, 40px) scale(0.95) rotate(-5deg); }
+    100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
 /* Noise texture overlay */
 .noise-overlay::before {
     content: '';

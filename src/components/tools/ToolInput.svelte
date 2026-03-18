@@ -13,9 +13,10 @@
 
 <div class="tool-input-wrapper">
     {#if label}
-        <label class="tool-label">{label}</label>
+        <label for="tool-input-{value}" class="tool-label">{label}</label>
     {/if}
     <input
+        id="tool-input-{value}"
         {type}
         bind:value
         {placeholder}

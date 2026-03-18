@@ -32,22 +32,21 @@
 
     <!-- Dynamic Backgrounds -->
     {#if themeState.value === "serious"}
-        <!-- Serious Mode: Subtle Glowing Grid -->
-        <div
-            class="fixed inset-0 bg-serious-grid pointer-events-none opacity-40"
-        ></div>
-        <div
-            class="glow-orb fixed top-0 left-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[100px] pointer-events-none -translate-x-1/2 -translate-y-1/2 animate-glow-pulse"
-        ></div>
-        <div
-            class="glow-orb fixed bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[120px] pointer-events-none translate-x-1/3 translate-y-1/3 animate-glow-pulse opacity-70"
-            style="animation-delay: 2s;"
-        ></div>
+        <!-- Serious Mode -->
+        <div class="fixed inset-0 bg-serious-grid pointer-events-none opacity-30"></div>
+        <div class="fixed inset-0 bg-noise pointer-events-none opacity-[0.03] mix-blend-overlay"></div>
+        <div class="glow-orb fixed top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-20" style="background: var(--accent);"></div>
+        <div class="glow-orb fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] pointer-events-none opacity-20" style="background: var(--gradient-end);"></div>
+        <div class="glow-orb fixed top-[30%] left-[50%] -translate-x-1/2 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none opacity-[0.08]" style="background: var(--terminal-green);"></div>
     {:else}
-        <!-- Fun Mode: Animated Mesh Gradient -->
-        <div
-            class="fixed inset-0 pointer-events-none mesh-gradient opacity-90"
-        ></div>
+        <!-- Fun Mode -->
+        <div class="fixed inset-0 pointer-events-none mesh-gradient opacity-70"></div>
+        <div class="fixed inset-0 pointer-events-none overflow-hidden">
+           <div class="blob-shape blob-1"></div>
+           <div class="blob-shape blob-2"></div>
+           <div class="blob-shape blob-3"></div>
+        </div>
+        <div class="fixed inset-0 bg-white/30 backdrop-blur-[60px] pointer-events-none"></div>
     {/if}
 
     <!-- Floating Navigation -->

@@ -82,12 +82,12 @@
                 </div>
                 <!-- Decorative elements -->
                 <div
-                    class="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl -z-10"
-                    style="background: var(--accent); opacity: 0.2;"
+                    class="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl -z-10"
+                    style="background: var(--accent); opacity: 0.15;"
                 ></div>
                 <div
-                    class="absolute -top-4 -left-4 w-16 h-16 rounded-xl -z-10"
-                    style="background: var(--accent); opacity: 0.1;"
+                    class="absolute -top-6 -left-6 w-24 h-24 rounded-2xl -z-10"
+                    style="background: var(--gradient-end); opacity: 0.1;"
                 ></div>
             </div>
 
@@ -146,19 +146,13 @@
                 <!-- CTA -->
                 <div class="flex justify-center lg:justify-start gap-4">
                     <a
-                        href="mailto:aliirsyaadn@gmail.com"
+                        href="https://linkedin.com/in/aliirsyaadn"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="btn-primary inline-flex items-center gap-2"
                     >
-                        <i class="fa-solid fa-envelope"></i>
+                        <i class="fa-brands fa-linkedin"></i>
                         Contact Me
-                    </a>
-                    <a
-                        href="/resume.pdf"
-                        target="_blank"
-                        class="btn-secondary inline-flex items-center gap-2"
-                    >
-                        <i class="fa-solid fa-download"></i>
-                        Resume
                     </a>
                 </div>
             </div>

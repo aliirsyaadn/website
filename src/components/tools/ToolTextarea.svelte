@@ -12,9 +12,10 @@
 
 <div class="tool-textarea-wrapper">
     {#if label}
-        <label class="tool-label">{label}</label>
+        <label for="tool-textarea-{value}" class="tool-label">{label}</label>
     {/if}
     <textarea
+        id="tool-textarea-{value}"
         bind:value
         {placeholder}
         {rows}

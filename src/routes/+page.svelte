@@ -3,9 +3,11 @@
     import { reveal } from "$lib/animations";
     import projects from "../data/projects.json";
     import blogs from "../data/blogs.json";
+    import tools from "../data/tools.json";
 
     let featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
     let recentBlogs = blogs.slice(0, 3);
+    let featuredTools = tools.slice(0, 3);
 
     const socialLinks = [
         {
@@ -200,6 +202,60 @@
                         {/each}
                     </div>
                 </article>
+            {/each}
+        </div>
+    </div>
+</section>
+
+<!-- Tools Preview Section -->
+<section class="py-24 px-6 relative z-10" use:reveal={{ duration: "0.8s", distance: "40px" }}>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h2 class="text-3xl sm:text-4xl font-display font-bold mb-2">
+                    Developer <span class="text-accent-gradient">Tools</span>
+                </h2>
+                <p style="color: var(--text-secondary);">
+                    Handy utilities for developers
+                </p>
+            </div>
+            <a href="/tools" class="link-hover text-sm flex items-center gap-2">
+                View all <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {#each featuredTools as tool, i}
+                <a
+                    href="/tools/{tool.slug}"
+                    class="card p-6 stagger-item block group"
+                    style="animation-delay: {i * 0.1}s"
+                >
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110"
+                            style="background: var(--bg-tertiary);"
+                        >
+                            <i class={tool.icon} style="color: var(--accent);"></i>
+                        </div>
+                        <h3
+                            class="font-display font-semibold transition-colors group-hover:text-accent"
+                            style="color: var(--text-primary);"
+                        >
+                            {tool.title}
+                        </h3>
+                    </div>
+
+                    <p class="text-sm mb-4 line-clamp-3" style="color: var(--text-secondary);">
+                        {tool.description}
+                    </p>
+
+                    <div class="flex flex-wrap gap-2">
+                        {#each tool.tags as tag}
+                            <span class="tag">{tag}</span>
+                        {/each}
+                    </div>
+                </a>
             {/each}
         </div>
     </div>

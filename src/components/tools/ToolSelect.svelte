@@ -4,10 +4,10 @@
 
 <div class="tool-select-wrapper">
     {#if label}
-        <label class="tool-label">{label}</label>
+        <label for="tool-select-{value}" class="tool-label">{label}</label>
     {/if}
     <div class="select-container">
-        <select bind:value {disabled} class="tool-select">
+        <select id="tool-select-{value}" bind:value {disabled} class="tool-select">
             {#each options as option}
                 <option value={option.value}>{option.label}</option>
             {/each}
