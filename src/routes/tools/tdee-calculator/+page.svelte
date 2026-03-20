@@ -42,6 +42,15 @@
 
     let tdee = $derived(Math.round(bmr * activity));
 
+    let bmi = $derived((weight / ((height / 100) ** 2)).toFixed(1));
+    let bmiCategory = $derived.by(() => {
+        const val = parseFloat(bmi);
+        if (val < 18.5) return 'Underweight';
+        if (val >= 18.5 && val < 25) return 'Normal weight';
+        if (val >= 25 && val < 30) return 'Overweight';
+        return 'Obesity';
+    });
+
     let targetCalories = $derived.by(() => {
         if (activeGoal === 'cutting') return tdee - 500;
         if (activeGoal === 'bulking') return tdee + 500;
@@ -89,8 +98,13 @@
                 Using Katch-McArdle equation for enhanced precision based on your Lean Body Mass.
             </div>
         {/if}
-        <div class="mt-4 text-[var(--accent)] font-semibold font-mono text-center bmr-banner">
-            Estimated BMR: {bmr} kcal/day
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="text-[var(--accent)] font-semibold font-mono text-center bmr-banner">
+                Estimated BMR: {bmr} kcal/day
+            </div>
+            <div class="text-[var(--accent)] font-semibold font-mono text-center bmr-banner">
+                BMI: {bmi} ({bmiCategory})
+            </div>
         </div>
     </ToolSection>
 
@@ -217,6 +231,46 @@
                     </div>
                 </div>
             {/each}
+        </div>
+    </ToolSection>
+
+    <!-- Educational Info -->
+    <ToolSection title="Understanding Your Metrics">
+        <div class="space-y-6 text-[var(--text-secondary)] leading-relaxed text-sm md:text-base">
+            <div>
+                <h4 class="text-[var(--text-primary)] font-semibold mb-1">Basal Metabolic Rate (BMR)</h4>
+                <p>Your BMR is the number of calories your body needs to accomplish its most basic (basal) life-sustaining functions if you rested all day. We use the <strong>Mifflin-St Jeor</strong> equation by default, or the <strong>Katch-McArdle</strong> formula if you provide your Body Fat Percentage.</p>
+            </div>
+            <div>
+                <h4 class="text-[var(--text-primary)] font-semibold mb-1">Total Daily Energy Expenditure (TDEE)</h4>
+                <p>Your TDEE is an estimation of how many calories you burn per day when exercise and daily activity are taken into account. It is calculated by multiplying your BMR by your Activity Level multiplier.</p>
+            </div>
+            <div>
+                <h4 class="text-[var(--text-primary)] font-semibold mb-3">Body Mass Index (BMI) & Categories</h4>
+                <p class="mb-3">BMI is a simple index of weight-for-height that is commonly used to classify underweight, overweight, and obesity in adults. The World Health Organization (WHO) defines the following categories:</p>
+                <div class="bg-[var(--bg-tertiary)] border border-[var(--border)] rounded-md overflow-hidden text-sm">
+                    <div class="grid grid-cols-2 p-3 border-b border-[var(--border)] bg-[var(--bg-secondary)] font-semibold text-[var(--text-primary)]">
+                        <div>Category</div>
+                        <div>BMI Range</div>
+                    </div>
+                    <div class="grid grid-cols-2 p-3 border-b border-[var(--border)]">
+                        <div class="text-blue-400 font-medium">Underweight</div>
+                        <div>Below 18.5</div>
+                    </div>
+                    <div class="grid grid-cols-2 p-3 border-b border-[var(--border)]">
+                        <div class="text-green-500 font-medium">Normal weight</div>
+                        <div>18.5 &ndash; 24.9</div>
+                    </div>
+                    <div class="grid grid-cols-2 p-3 border-b border-[var(--border)]">
+                        <div class="text-amber-500 font-medium">Overweight</div>
+                        <div>25.0 &ndash; 29.9</div>
+                    </div>
+                    <div class="grid grid-cols-2 p-3">
+                        <div class="text-red-500 font-medium">Obesity</div>
+                        <div>30.0 and above</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </ToolSection>
 
