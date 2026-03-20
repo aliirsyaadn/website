@@ -1,0 +1,27 @@
+{
+  "indonesian": [
+    { "name": "Nasi Goreng", "img": "/images/tdee/nasi_goreng_1773990154356.png", "cal": 600, "p": 15, "f": 20, "c": 60, "tag": "High Carb" },
+    { "name": "Sate Ayam", "img": "/images/tdee/sate_ayam_1773990169447.png", "cal": 350, "p": 35, "f": 15, "c": 10, "tag": "High Protein" },
+    { "name": "Rendang Daging", "img": "/images/tdee/rendang_1773990181894.png", "cal": 450, "p": 40, "f": 25, "c": 10, "tag": "Protein/Fat" },
+    { "name": "Gado-Gado", "img": "/images/tdee/gado_gado_1773990198094.png", "cal": 350, "p": 15, "f": 20, "c": 30, "tag": "Balanced" },
+    { "name": "Ketoprak", "img": "/images/tdee/ketoprak_1773991522111.png", "cal": 400, "p": 12, "f": 18, "c": 50, "tag": "Carbs/Fat" },
+    { "name": "Ayam Bakar", "img": "/images/tdee/ayam_bakar_1773991541444.png", "cal": 250, "p": 30, "f": 10, "c": 5, "tag": "High Protein" },
+    { "name": "Nasi Padang", "img": "/images/tdee/nasi_padang_1773991557638.png", "cal": 700, "p": 25, "f": 30, "c": 80, "tag": "High Calorie" },
+    { "name": "Soto Ayam", "img": "/images/tdee/soto_ayam_1773991576127.png", "cal": 300, "p": 20, "f": 10, "c": 25, "tag": "Balanced" },
+    { "name": "Bakso Sapi", "img": "/images/tdee/bakso_sapi_1773991591698.png", "cal": 300, "p": 15, "f": 15, "c": 20, "tag": "Protein/Fat" },
+    { "name": "Mie Goreng", "img": "/images/tdee/mie_goreng_1773991609447.png", "cal": 500, "p": 10, "f": 18, "c": 60, "tag": "High Carb" },
+    { "name": "Pecel Lele", "img": "/images/tdee/pecel_lele_1773991623017.png", "cal": 350, "p": 20, "f": 25, "c": 10, "tag": "Protein/Fat" },
+    { "name": "Nasi Uduk", "img": "/images/tdee/nasi_uduk_1773991639054.png", "cal": 400, "p": 8, "f": 15, "c": 50, "tag": "Carbs/Fat" },
+    { "name": "Ayam Penyet", "img": "/images/tdee/ayam_penyet_1773991657041.png", "cal": 350, "p": 25, "f": 20, "c": 15, "tag": "High Protein" },
+    { "name": "Ikan Bakar", "img": "/images/tdee/ikan_bakar_1773991669388.png", "cal": 200, "p": 35, "f": 5, "c": 2, "tag": "Lean Protein" },
+    { "name": "Pempek", "img": "/images/tdee/pempek_1773991685007.png", "cal": 300, "p": 10, "f": 15, "c": 30, "tag": "Carbs/Fat" },
+    { "name": "Bubur Ayam", "img": "/images/tdee/bubur_ayam_1773991700249.png", "cal": 300, "p": 15, "f": 8, "c": 45, "tag": "Carbs" }
+  ],
+  "proteins": [
+    { "name": "Chicken Breast (250g)", "img": "/images/tdee/chicken_breast_1773991717318.png", "cal": 412, "p": 77, "f": 9, "c": 0, "tag": "Gym Staple" },
+    { "name": "2 Boiled Eggs", "img": "https://placehold.co/400x300/1e293b/e2e8f0?text=Boiled+Eggs", "cal": 140, "p": 12, "f": 10, "c": 1, "tag": "Gym Staple" },
+    { "name": "Tempeh Goreng", "img": "https://placehold.co/400x300/1e293b/e2e8f0?text=Tempeh", "cal": 200, "p": 15, "f": 12, "c": 10, "tag": "Plant Protein" },
+    { "name": "Tahu Goreng", "img": "https://placehold.co/400x300/1e293b/e2e8f0?text=Tahu+Goreng", "cal": 150, "p": 10, "f": 10, "c": 5, "tag": "Plant Protein" },
+    { "name": "1 Scoop Whey (30g)", "img": "https://placehold.co/400x300/1e293b/e2e8f0?text=Whey+Protein", "cal": 120, "p": 25, "f": 1, "c": 2, "tag": "Gym Staple" }
+  ]
+}

@@ -47,5 +47,12 @@
         "description": "Create secure, random passwords with customizable parameters",
         "icon": "fa-solid fa-key",
         "tags": ["Security", "Generator"]
+    },
+    {
+        "slug": "tdee-calculator",
+        "title": "TDEE & Macro Calculator",
+        "description": "Calculate daily calories and macros for Gym, Bulking, and Cutting.",
+        "icon": "fa-solid fa-fire",
+        "tags": ["Fitness", "Calculator"]
     }
 ]
